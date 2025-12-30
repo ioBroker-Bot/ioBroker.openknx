@@ -122,7 +122,8 @@
       "uk": "повнофункціональний адаптер з відкритим кодом для KNX"
     },
     "authors": [
-      "Boellner <boellnerboellner@gmail.com>"
+      "Boellner <boellnerboellner@gmail.com>",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
     ],
     "keywords": [
       "knx free open source eib"
@@ -162,12 +163,12 @@
     },
     "dependencies": [
       {
-        "js-controller": ">=6.0.0"
+        "js-controller": ">=6.0.11"
       }
     ],
     "globalDependencies": [
       {
-        "admin": ">=7.4.10"
+        "admin": ">=7.6.17"
       }
     ],
     "tier": 2
