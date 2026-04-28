@@ -805,7 +805,7 @@ class openknx extends utils.Adapter {
             return "read";
         } else if (gaData.common.write) {
             this.log.debug(
-                `Outbound GroupValue_Write to " ${ga} value: ${isRaw ? rawVal : JSON.stringify(knxVal)} from ${id}`,
+                `Outbound GroupValue_Write to ${ga} value: ${isRaw ? rawVal : JSON.stringify(knxVal)} from ${id} (queue: ${this.knxConnection?.commandQueue?.length || 0})`,
             );
             try {
                 if (isRaw) {
@@ -1232,7 +1232,7 @@ class openknx extends utils.Adapter {
                                             stateval,
                                             this.gaList.getDataById(id).native.dpt,
                                         );
-                                        this.log.debug(`responding with value ${state.val}`);
+                                        this.log.debug(`responding to ${dest} with value ${state.val} (queue: ${this.knxConnection.commandQueue?.length || 0})`);
                                     } catch (e) {
                                         this.log.error(`Failed to respond to ${dest}: ${e.message || e}`);
                                     }
