@@ -975,9 +975,8 @@ class openknx extends utils.Adapter {
             KNXQueueSendIntervalMilliseconds: this.config.minimumDelay || 25,
             // https://github.com/Supergiovane/node-red-contrib-knx-ultimate/issues/78
             suppress_ack_ldatareq: true,
-            // Disable KNXUltimate internal logging - we use logStream handler instead
-            // This prevents EPIPE errors during shutdown
-            loglevel: this.log.level === "silly" ? "trace" : "info",
+            // Enable KNXUltimate internal logging at debug level to see L_DATA_CON timing
+            loglevel: this.log.level === "silly" ? "trace" : this.log.level === "debug" ? "debug" : "info",
         };
 
         // KNX Secure options
