@@ -99,6 +99,7 @@
                     });
                 }, 1000);
                 if (settings.autoreadEnabled === undefined) settings.autoreadEnabled = false;
+                if (settings.rawBaseDpt === undefined) settings.rawBaseDpt = true;
                 if (settings.deviceName === undefined) settings.deviceName = "";
                 if (settings.eibadr === undefined) settings.eibadr = "0.0.0";
                 if (settings.gwip === undefined) settings.gwip = "127.0.0.1";
@@ -1168,11 +1169,16 @@
                                 <input class="value" id="autoreadEnabled" type="checkbox" />
                                 <label class="translate" for="autoreadEnabled"
                                     >readout values of autoread iob objects on startup</label>
-                            </div>  
+                            </div>
                             <div class="col s12 input-field">
                                 <input class="value" id="noWarnUnknownGa" type="checkbox" />
                                 <label class="translate" for="noWarnUnknownGa"
                                     >do not warn on unknown KNX group adresses</label>
+                            </div>
+                            <div class="col s12 input-field">
+                                <input class="value" id="rawBaseDpt" type="checkbox" checked />
+                                <label class="translate" for="rawBaseDpt"
+                                    >treat base DPTs without subtype as raw values (e.g. DPT5 = 0-255 without scaling)</label>
                             </div>
  
                         </div>

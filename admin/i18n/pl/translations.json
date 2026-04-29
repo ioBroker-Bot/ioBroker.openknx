@@ -96,6 +96,7 @@
     "physical KNX address in format a/b/c not valid": "adres fizyczny KNX w formacie a/b/c jest nieprawidłowy",
     "please provide a valid minimum send delay value between 0 and 1000 [ms]": "proszę podać poprawną minimalną wartość opóźnienia wysyłania pomiędzy 0 a 1000 [ms]",
     "readout values of autoread iob objects on startup": "odczyt wartości obiektów iob z automatycznym odczytem przy uruchomieniu",
+    "treat base DPTs without subtype as raw values (e.g. DPT5 = 0-255 without scaling; disable for KNXUltimate default where DPT5 = percentage 0-100%)": "traktuj bazowe DPT bez podtypu jako wartości surowe",
     "remove existing IOB objects that are not in ETS import file": "usuń istniejące obiekty IOB, których nie ma w pliku importu ETS",
     "set acknowledgement flag when application writes to object": "ustaw flagę potwierdzenia, gdy aplikacja zapisuje do obiektu",
     "this is not a number": "to nie jest liczba",

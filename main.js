@@ -50,6 +50,13 @@ class openknx extends utils.Adapter {
         this.stopping = false;
         this.linkedStateMap = {}; // foreignStateId → knxObjectId (reverse lookup for Direct Link)
 
+        // Base DPTs without subtype that get unwanted scaling in KNXUltimate
+        // Map to their raw/unscaled subtype equivalent (like knx.js 0.9.x did)
+        this.baseDptRawMap = {
+            DPT5: "DPT5.005",
+            DPT6: "DPT6.010",
+        };
+
         // redirect log from KNXUltimate (winston-based logStream) to adapter log
         // Collapse multiline messages (stack traces) into a single line
         this.logHandler = entry => {
@@ -585,6 +592,21 @@ class openknx extends utils.Adapter {
         return duplicates.length ? message : "";
     }
 
+    /**
+     * Returns the effective DPT string. When rawBaseDpt is enabled and a base DPT
+     * without subtype is given (e.g. "DPT5"), maps it to an unscaled subtype
+     * to match knx.js 0.9.x behavior (no percentage scaling).
+     */
+    effectiveDpt(dpt) {
+        if (this.config.rawBaseDpt !== false && dpt && dpt.indexOf(".") === -1) {
+            const mapped = this.baseDptRawMap[dpt.toUpperCase()];
+            if (mapped) {
+                return mapped;
+            }
+        }
+        return dpt;
+    }
+
     // obj to string and date to number for iobroker from knx stack
     convertType(val) {
         let ret;
@@ -684,7 +706,7 @@ class openknx extends utils.Adapter {
                     `Direct Link [${mode}]: ${id} changed to ${JSON.stringify(state.val)}, writing ${JSON.stringify(writeVal)} to GA ${gaData.native.address}`,
                 );
                 try {
-                    this.knxConnection.write(gaData.native.address, writeVal, gaData.native.dpt);
+                    this.knxConnection.write(gaData.native.address, writeVal, this.effectiveDpt(gaData.native.dpt));
                 } catch (e) {
                     this.log.warn(`Direct Link write failed for ${gaData.native.address}: ${e.message}`);
                 }
@@ -718,7 +740,7 @@ class openknx extends utils.Adapter {
             return "not connected to KNX bus";
         }
 
-        const dpt = gaData.native.dpt;
+        const dpt = this.effectiveDpt(gaData.native.dpt);
         const ga = gaData.native.address;
         let knxVal = state.val;
         let rawVal;
@@ -904,7 +926,7 @@ class openknx extends utils.Adapter {
                 if (foreignState?.val != null) {
                     const gaData = this.gaList.getDataById(knxId);
                     if (gaData?.native?.address && gaData?.native?.dpt) {
-                        this.knxConnection.write(gaData.native.address, foreignState.val, gaData.native.dpt);
+                        this.knxConnection.write(gaData.native.address, foreignState.val, this.effectiveDpt(gaData.native.dpt));
                         this.log.debug(`Direct Link sync: ${foreignId}=${foreignState.val} → ${gaData.native.address}`);
                     }
                 }
@@ -1034,7 +1056,7 @@ class openknx extends utils.Adapter {
                         const data = this.gaList.getDataById(key);
                         let dptConfig = null;
                         try {
-                            dptConfig = dptlib.resolve(data.native.dpt);
+                            dptConfig = dptlib.resolve(this.effectiveDpt(data.native.dpt));
                         } catch {
                             // Unknown DPT - will use raw mode
                         }
@@ -1205,7 +1227,7 @@ class openknx extends utils.Adapter {
                             this.getForeignState(data.native.linkedState, (fErr, fState) => {
                                 if (!fErr && fState && fState.val != null) {
                                     try {
-                                        this.knxConnection.respond(dest, fState.val, data.native.dpt);
+                                        this.knxConnection.respond(dest, fState.val, this.effectiveDpt(data.native.dpt));
                                         this.log.debug(`Direct Link: Read ${dest} → ${fState.val}`);
                                     } catch (e) {
                                         this.log.error(`Direct Link: respond ${dest}: ${e.message || e}`);
@@ -1229,7 +1251,7 @@ class openknx extends utils.Adapter {
                                         this.knxConnection.respond(
                                             dest,
                                             stateval,
-                                            this.gaList.getDataById(id).native.dpt,
+                                            this.effectiveDpt(this.gaList.getDataById(id).native.dpt),
                                         );
                                         this.log.debug(`responding to ${dest} with value ${state.val} (queue: ${this.knxConnection.commandQueue?.length || 0})`);
                                     } catch (e) {
