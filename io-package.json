@@ -179,7 +179,7 @@
     "tunnelUserPassword": "",
     "tunnelUserId": "",
     "localInterface": "",
-    "minimumDelay": 25,
+    "sendInterval": 25,
     "noWarnUnknownGa": false,
     "useBoolean": true,
     "knxCompatMode": false,

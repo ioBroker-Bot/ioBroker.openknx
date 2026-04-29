@@ -13,7 +13,7 @@ const settings = {
     native: {
         gwip: "127.0.0.1",
         gwipport: 3671,
-        minimumDelay: 40,
+        sendInterval: 40,
         bind: "127.0.0.1",
         eibadr: "1.1.1",
         onlyAddNewObjects: true,

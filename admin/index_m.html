@@ -106,7 +106,7 @@
                 if (settings.gwipport === undefined) settings.gwipport = 3671;
                 if (settings.localInterface === undefined) settings.localInterface = "";
                 if (settings.hostProtocol === undefined) settings.hostProtocol = "TunnelUDP";
-                if (settings.minimumDelay === undefined) settings.minimumDelay = 80;
+                if (settings.sendInterval === undefined) settings.sendInterval = 25;
                 if (settings.onlyAddNewObjects === undefined) settings.onlyAddNewObjects = false;
                 if (settings.removeUnusedObjects === undefined) settings.removeUnusedObjects = false;
                 if (settings.setAckOnWrite === undefined) settings.setAckOnWrite = false;
@@ -189,14 +189,14 @@
                             }
                         }
 
-                        if (id === "minimumDelay") {
-                            var intervall = $("#minimumDelay").val();
+                        if (id === "sendInterval") {
+                            var intervall = $("#sendInterval").val();
                             number = Number(intervall);
                             if (isNumber(intervall) && number >= 0 && number <= 1000) {
-                                $("#minimumDelay").val(number);
+                                $("#sendInterval").val(number);
                             } else {
                                 alert("please provide a valid minimum send delay value between 0 and 1000 [ms]");
-                                $("#minimumDelay").val(settings.minimumDelay).change();
+                                $("#sendInterval").val(settings.sendInterval).change();
                             }
                         }
 
@@ -1160,8 +1160,8 @@
                                 <label class="translate" for="hostProtocol">Protocol</label>
                             </div>
                             <div class="col s12 l3 input-field">
-                                <input class="value" id="minimumDelay" type="text" />
-                                <label for="minimumDelay" class="translate"
+                                <input class="value" id="sendInterval" type="text" />
+                                <label for="sendInterval" class="translate"
                                     >Minimum send delay between two frames [ms]</label>
                             </div>
                             <!-- materialize grid small 12 of 12 columns https://materializecss.com/grid.html -->

@@ -994,7 +994,7 @@ class openknx extends utils.Adapter {
             ipPort: this.config.gwipport,
             physAddr: this.config.eibadr || "0.0.0",
             localIPAddress: this.config.localInterface,
-            KNXQueueSendIntervalMilliseconds: this.config.minimumDelay || 25,
+            KNXQueueSendIntervalMilliseconds: this.config.sendInterval || 25,
             // https://github.com/Supergiovane/node-red-contrib-knx-ultimate/issues/78
             suppress_ack_ldatareq: true,
             // Enable KNXUltimate internal logging at debug level to see L_DATA_CON timing
@@ -1076,7 +1076,7 @@ class openknx extends utils.Adapter {
                 // Phase 2: send autoread requests (asynchronous, non-blocking)
                 if (autoreadGAs.length > 0) {
                     // use realistic per-telegram time so queue stays empty between reads
-                    const autoreadInterval = Math.max(this.config.minimumDelay || 25, 200);
+                    const autoreadInterval = Math.max(this.config.sendInterval || 25, 200);
                     const estimatedSec = Math.ceil((autoreadGAs.length * autoreadInterval) / 1000);
                     const estimatedTime =
                         estimatedSec >= 60
@@ -1447,7 +1447,7 @@ class openknx extends utils.Adapter {
             this.log.info(
                 `Connecting to knx gateway: ${this.config.gwip}:${this.config.gwipport} device name: ${
                     this.config.deviceName
-                } with physical adr: ${this.config.eibadr} minimum send delay: ${this.config.minimumDelay} ms` +
+                } with physical adr: ${this.config.eibadr} minimum send delay: ${this.config.sendInterval} ms` +
                     ` debug level: ${this.log.level}`,
             );
         }
