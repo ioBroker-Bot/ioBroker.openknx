@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "openknx",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "news": {
+      "1.1.7": {
+        "en": "improve Umlaute handling for DPT-16",
+        "de": "Verbesserung der Umlaute Handhabung für DPT-16",
+        "ru": "улучшение управляемости Umlaute для DPT-16",
+        "pt": "melhorar o manuseio de Umlaute para o DPT-16",
+        "nl": "umlautebehandeling verbeteren voor DPT-16",
+        "fr": "améliorer la manipulation Umlaute pour DPT-16",
+        "it": "migliorare la gestione Umlaute per DPT-16",
+        "es": "mejorar el manejo de Umlaute para DPT-16",
+        "pl": "poprawa obsługi Umlaute dla DPT- 16",
+        "uk": "поліпшити роботу Umlaute для DPT-16",
+        "zh-cn": "改进 DPT-16 的 Umlaute 处理"
+      },
       "1.1.6": {
         "en": "**breaking:** KNX communication switched to KNXUltimate\n**breaking:** DPT21 property names changed (outofservice → outOfService, inalarm → inAlarm, alarmeunack → alarmUnAck), values must be boolean\n**breaking:** DPT237 property names changed to camelCase\nfeature: KNX Secure support\nfeature: Native .knxproj import (ETS4/5/6, password-protected) with flags, DPT inference, room assignment\nfeature: Extended DPT coverage (9 additional DPTs, including DPT-22, 213, 222, 235, 242, 249, 251)\nfeature: Improved connection stability\nfeature: Improved role detection (switch, level, value, text, date) based on DPT type\nfeature: Direct Link all iobroker states to a KNX state\nfeature: GA-Tools: all GA properties editable (DPT, type, role, flags) with compact layout",
         "de": "**breaking:** KNX-Kommunikation auf KNXUltimate umgestellt\n**breaking:** DPT21 Eigenschaftsnamen geändert (outofservice → outOfService, inalarm → inAlarm, alarmeunack → alarmUnAck), Werte müssen boolean sein\n**breaking:** DPT237 Eigenschaftsnamen auf camelCase geändert\nFeature: KNX Secure Unterstützung\nFeature: Nativer .knxproj Import (ETS4/5/6, passwortgeschützt) mit Flags, DPT-Erkennung, Raumzuordnung\nFeature: Erweiterte DPT-Abdeckung (9 zusätzliche DPTs, u.a. DPT-22, 213, 222, 235, 242, 249, 251)\nFeature: Verbesserte Verbindungsstabilität\nFeature: Verbesserte Rollenerkennung (switch, level, value, text, date) basierend auf DPT-Typ\nFeature: Direct Link – beliebige ioBroker-States mit KNX-Gruppenadressen verknüpfen\nFeature: GA-Tools: alle GA-Eigenschaften editierbar (DPT, Typ, Rolle, Flags) mit kompaktem Layout",

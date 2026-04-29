@@ -1,4 +1,8 @@
 # Older changes
+## 0.7.3 (2024-03-05)
+
+-   feature: one of the warnings is configurable in the dialog
+
 ## 0.7.2 (2024-01-09)
 
 -   feature: handle network connection instability issues

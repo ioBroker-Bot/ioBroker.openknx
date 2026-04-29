@@ -52,6 +52,9 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
   Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 1.1.7 (2026-04-29)
+- improve Umlaute handling for DPT-16
+
 ### 1.1.6 (2026-04-12)
 
 - (TA2k) **breaking:** KNX communication switched to KNXUltimate
@@ -81,10 +84,6 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
 -   feature: put KNX interface name into log
 -   bugfix: #419 wait for connection complete before data processing in case of receiving data before
 -   bugfix: #457 Ack missing after changing IOB object value
-
-### 0.7.3 (2024-03-05)
-
--   feature: one of the warnings is configurable in the dialog
 
 ### initial version
 
