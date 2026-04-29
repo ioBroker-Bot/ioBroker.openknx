@@ -52,6 +52,9 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
   Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 1.1.7 (2026-04-29)
 - improve Umlaute handling for DPT-16
 
