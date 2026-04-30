@@ -1073,6 +1073,25 @@ class openknx extends utils.Adapter {
                 this.autoreaddone = true;
                 this.countObjectsNotification(cnt_withDPT);
 
+                // Warn about large DPTs with answer_groupValueResponse enabled
+                const largeDptResponders = [];
+                for (const key of this.gaList) {
+                    const data = this.gaList.getDataById(key);
+                    if (data.native.answer_groupValueResponse && data.native.dpt) {
+                        const dptUpper = data.native.dpt.toUpperCase();
+                        if (dptUpper.startsWith("DPT16") || dptUpper.startsWith("DPT14") || dptUpper.startsWith("DPT13") || dptUpper.startsWith("DPT12")) {
+                            largeDptResponders.push(`${data.native.address} (${data.native.dpt})`);
+                        }
+                    }
+                }
+                if (largeDptResponders.length > 0) {
+                    this.log.info(
+                        `${largeDptResponders.length} large DPT objects (DPT12-16) with answer_groupValueResponse enabled detected. ` +
+                        `These consume significant bus time (~65ms each). Consider disabling answer_groupValueResponse on these GAs ` +
+                        `if a physical device already responds or if the value is sent via GroupValue_Write on change.`,
+                    );
+                }
+
                 // Phase 2: send autoread requests (asynchronous, non-blocking)
                 if (autoreadGAs.length > 0) {
                     // use realistic per-telegram time so queue stays empty between reads
