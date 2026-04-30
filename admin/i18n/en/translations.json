@@ -74,7 +74,6 @@
     "Protocol": "Protocol",
     "Read": "Read",
     "readout values of autoread iob objects on startup": "readout values of autoread iob objects on startup",
-    "treat base DPTs without subtype as raw values (e.g. DPT5 = 0-255 without scaling; disable for KNXUltimate default where DPT5 = percentage 0-100%)": "treat base DPTs without subtype as raw values (e.g. DPT5 = 0-255 without scaling; disable for KNXUltimate default where DPT5 = percentage 0-100%)",
     "Regex to identify Status GAs": "Regex to identify Status GAs",
     "Regex to identify Status GAs (ending with status, rm, rückmeldung..).": "Regex to identify Status GAs (ending with status, rm, rückmeldung..)",
     "remove existing IOB objects that are not in ETS import file": "remove existing IOB objects that are not in ETS import file",
@@ -100,5 +99,6 @@
     "Unsupported file format": "Unsupported file format",
     "use common.type boolean for 1 bit enum instead of number": "use common.type boolean for 1 bit enum instead of number",
     "Value": "Value",
-    "Write": "Write"
+    "Write": "Write",
+    "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)": "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)"
 }

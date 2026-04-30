@@ -96,9 +96,9 @@
     "physical KNX address in format a/b/c not valid": "Physikalische KNX-Adresse im Format a/b/c ungültig",
     "please provide a valid minimum send delay value between 0 and 1000 [ms]": "Bitte geben Sie einen gültigen Wert für die Sendeverzögerung zwischen 0 und 1000 [ms] an",
     "readout values of autoread iob objects on startup": "Werte von Autoread-IOB-Objekten beim Start des Adapters auslesen",
-    "treat base DPTs without subtype as raw values (e.g. DPT5 = 0-255 without scaling; disable for KNXUltimate default where DPT5 = percentage 0-100%)": "Basis-DPTs ohne Subtyp als Rohwerte behandeln (z.B. DPT5 = 0-255 ohne Skalierung; deaktivieren für KNXUltimate-Standard wo DPT5 = Prozent 0-100%)",
     "remove existing IOB objects that are not in ETS import file": "Vorhandene IOB-Objekte entfernen, die nicht in der ETS-Importdatei enthalten sind",
     "set acknowledgement flag when application writes to object": "Bestätigungsflag setzen, wenn Anwendung auf Objekt schreibt",
     "this is not a number": "dies ist keine Zahl",
-    "use common.type boolean for 1 bit enum instead of number": "common.type boolean für 1-Bit-Enum anstelle von Zahl verwenden"
+    "use common.type boolean for 1 bit enum instead of number": "common.type boolean für 1-Bit-Enum anstelle von Zahl verwenden",
+    "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)": "Basis-DPTs als Rohwerte behandeln, z.B. DPT5 = 0-255 (openknx 0.9.1 Kompatibilität)"
 }
