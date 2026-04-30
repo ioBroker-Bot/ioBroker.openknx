@@ -1,4 +1,10 @@
 # Older changes
+## 0.8.0 (2024-03-30)
+
+-   feature: put KNX interface name into log
+-   bugfix: #419 wait for connection complete before data processing in case of receiving data before
+-   bugfix: #457 Ack missing after changing IOB object value
+
 ## 0.7.3 (2024-03-05)
 
 -   feature: one of the warnings is configurable in the dialog

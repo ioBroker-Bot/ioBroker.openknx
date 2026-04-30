@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "openknx",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "news": {
+      "1.1.8": {
+        "en": "add compatiblity mode für raw DPT5.*\nreduce default delay to 25ms",
+        "de": "Kombatiblitäts-Modus für raw DPT5.*\nDefault-Delay auf 25m reduziert",
+        "ru": "добавить режим совместимости с сырым DPT5.*\nуменьшить задержку до 25 мс",
+        "pt": "adicionar o modo de compatibilidade für cru DPT5.*\nreduzir o atraso padrão para 25ms",
+        "nl": "compatiblity mode für raw DPT5.*\nde standaardvertraging verlagen naar 25ms",
+        "fr": "ajouter le mode de compatibilité für brut DPT5.*\nréduire le délai par défaut à 25ms",
+        "it": "aggiungere la modalità compatiblity für raw DPT5.*\nridurre il ritardo predefinito a 25ms",
+        "es": "añadir compatiblity mode für raw DPT5.*\nreducir el retraso predeterminado a 25 ms",
+        "pl": "dodać tryb kompatybilności für raw DPT5. *\nzmniejszyć domyślne opóźnienie do 25ms",
+        "uk": "додати режим сумісності für raw DPT5.*\nзменшити затримку за замовчуванням до 25ms",
+        "zh-cn": "添加相容性模式 für 原始 DPT5. *\n将默认延迟减少至 25 ms"
+      },
       "1.1.7": {
         "en": "improve Umlaute handling for DPT-16",
         "de": "Verbesserung der Umlaute Handhabung für DPT-16",

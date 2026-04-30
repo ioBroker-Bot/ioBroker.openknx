@@ -52,6 +52,10 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
   Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 1.1.8 (2026-04-30)
+- add compatiblity mode für raw DPT5.*
+- reduce default delay to 25ms
+
 ### 1.1.7 (2026-04-29)
 - improve Umlaute handling for DPT-16
 
@@ -78,12 +82,6 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
 
 - (mcm1957) Adapter requires node.js >= 18 and js-controller >= 5 now
 - (mcm1957) Dependencies have been updated
-
-### 0.8.0 (2024-03-30)
-
--   feature: put KNX interface name into log
--   bugfix: #419 wait for connection complete before data processing in case of receiving data before
--   bugfix: #457 Ack missing after changing IOB object value
 
 ### initial version
 
