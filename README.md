@@ -85,6 +85,8 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
 
 -   initial version from https://www.npmjs.com/package/iobroker.knx/v/0.8.3
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 Copyright 2024 contributors to the ioBroker.openknx project
