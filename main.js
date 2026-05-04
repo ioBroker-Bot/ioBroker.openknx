@@ -50,11 +50,15 @@ class openknx extends utils.Adapter {
         this.stopping = false;
         this.linkedStateMap = {}; // foreignStateId → knxObjectId (reverse lookup for Direct Link)
 
-        // Base DPTs without subtype that get unwanted scaling in KNXUltimate
-        // Map to their raw/unscaled subtype equivalent (like knx.js 0.9.x did)
+        // Base DPTs without subtype that get unwanted scaling or missing subtype in KNXUltimate
+        // KNXUltimate defaults to subtype .001 which doesn't exist for all DPTs
         this.baseDptRawMap = {
+            DPT3: "DPT3.007",
             DPT5: "DPT5.005",
             DPT6: "DPT6.010",
+            DPT14: "DPT14.007",
+            DPT15: "DPT15.000",
+            DPT29: "DPT29.010",
         };
 
         // redirect log from KNXUltimate (winston-based logStream) to adapter log
