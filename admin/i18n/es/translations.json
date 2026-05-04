@@ -99,6 +99,5 @@
     "remove existing IOB objects that are not in ETS import file": "eliminar objetos IOB existentes que no están en el archivo de importación ETS",
     "set acknowledgement flag when application writes to object": "establecer el indicador de reconocimiento cuando la aplicación escribe en el objeto",
     "this is not a number": "esto no es un numero",
-    "use common.type boolean for 1 bit enum instead of number": "use common.type booleano para enumeración de 1 bit en lugar de número",
-    "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)": "tratar DPTs base como valores sin procesar, ej. DPT5 = 0-255 (compatibilidad openknx 0.9.1)"
+    "use common.type boolean for 1 bit enum instead of number": "use common.type booleano para enumeración de 1 bit en lugar de número"
 }

@@ -99,7 +99,6 @@
                     });
                 }, 1000);
                 if (settings.autoreadEnabled === undefined) settings.autoreadEnabled = false;
-                if (settings.rawBaseDpt === undefined) settings.rawBaseDpt = true;
                 if (settings.deviceName === undefined) settings.deviceName = "";
                 if (settings.eibadr === undefined) settings.eibadr = "0.0.0";
                 if (settings.gwip === undefined) settings.gwip = "127.0.0.1";
@@ -1175,12 +1174,7 @@
                                 <label class="translate" for="noWarnUnknownGa"
                                     >do not warn on unknown KNX group adresses</label>
                             </div>
-                            <div class="col s12 input-field">
-                                <input class="value" id="rawBaseDpt" type="checkbox" checked />
-                                <label class="translate" for="rawBaseDpt"
-                                    >treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)</label>
-                            </div>
- 
+
                         </div>
                     </div>
                 </div>

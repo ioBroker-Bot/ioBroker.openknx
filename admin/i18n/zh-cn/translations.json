@@ -99,6 +99,5 @@
     "remove existing IOB objects that are not in ETS import file": "删除 ETS 导入文件中不存在的现有 IOB 对象",
     "set acknowledgement flag when application writes to object": "当应用程序写入对象时设置确认标志",
     "this is not a number": "这不是一个数字",
-    "use common.type boolean for 1 bit enum instead of number": "使用 common.type boolean 作为 1 位枚举而不是数字",
-    "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)": "将基本DPT视为原始值，如DPT5 = 0-255（openknx 0.9.1兼容）"
+    "use common.type boolean for 1 bit enum instead of number": "使用 common.type boolean 作为 1 位枚举而不是数字"
 }

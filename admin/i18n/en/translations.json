@@ -99,6 +99,5 @@
     "Unsupported file format": "Unsupported file format",
     "use common.type boolean for 1 bit enum instead of number": "use common.type boolean for 1 bit enum instead of number",
     "Value": "Value",
-    "Write": "Write",
-    "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)": "treat base DPTs as raw values, e.g. DPT5 = 0-255 (openknx 0.9.1 compatibility)"
+    "Write": "Write"
 }
