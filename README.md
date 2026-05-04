@@ -52,6 +52,9 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
   Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 1.1.9 (2026-05-04)
+- fix handling of unkown DPT
+
 ### 1.1.8 (2026-04-30)
 - add compatiblity mode für raw DPT5.*
 - reduce default delay to 25ms
@@ -77,11 +80,6 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (copilot) Adapter requires js-controller >= 6.0.11 now
 - (@klein0r) Adapter requires node.js >= 20 and js-controller >= 6 now
-
-### 0.9.0 (2024-04-21)
-
-- (mcm1957) Adapter requires node.js >= 18 and js-controller >= 5 now
-- (mcm1957) Dependencies have been updated
 
 ### initial version
 

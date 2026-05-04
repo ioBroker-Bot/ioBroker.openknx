@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "openknx",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "news": {
+      "1.1.9": {
+        "en": "fix handling of unkown DPT",
+        "de": "Die Behandlung von unbekannten DPTs gefixt",
+        "ru": "обработка Unkown DPT",
+        "pt": "corrigir o manuseamento de DPT deskown",
+        "nl": "fix handling van unkown DPT",
+        "fr": "fixer la manipulation du DPT décoloré",
+        "it": "gestione corretta di DPT non proprio",
+        "es": "arreglar el manejo de DPT unkown",
+        "pl": "fix handling of unkown DPT",
+        "uk": "фіксувати обробку unkown DPT",
+        "zh-cn": "固定处理未隐藏的 DPT"
+      },
       "1.1.8": {
         "en": "add compatiblity mode für raw DPT5.*\nreduce default delay to 25ms",
         "de": "Kombatiblitäts-Modus für raw DPT5.*\nDefault-Delay auf 25m reduziert",
@@ -80,19 +93,6 @@
         "pl": "funkcja: umieścić nazwę interfejsu KNX w logu\nbugfix: # 419 czekać na połączenie zakończone przed przetwarzaniem danych w przypadku otrzymania danych przed\nbugfix: # 457 Brak Ack po zmianie wartości obiektu IOB",
         "uk": "функція: покласти ім'я інтерфейсу KNX в журнал\nвиправлення помилок: #419 почекайте підключення до обробки даних у разі отримання даних до\nenglish, Українська, Français... Відсутня після зміни значення об'єкта IOB",
         "zh-cn": "特性: 将 KNX 接口名称放入日志\nbugfix: # 419 在数据处理之前等待连接完成, 以防在接收数据之前\n错误修正 : # 457 更改 IOB 对象值后丢失"
-      },
-      "0.7.3": {
-        "en": "feature: one of the warnings is configurable in the dialog",
-        "de": "feature: eine der warnungen ist im dialog konfigurierbar",
-        "ru": "функция: одно из предупреждений настраивается в диалоге",
-        "pt": "recurso: um dos avisos é configurável na caixa de diálogo",
-        "nl": "functie: een van de waarschuwingen is in het dialoogvenster instelbaar",
-        "fr": "fonctionnalité : un des avertissements est configurable dans la boîte de dialogue",
-        "it": "caratteristica: uno degli avvisi è configurabile nella finestra di dialogo",
-        "es": "función: una de las advertencias es configurable en el diálogo",
-        "pl": "funkcja: jeden z ostrzeżeń jest konfigurowalny w oknie dialogowym",
-        "uk": "функція: один з попереджень налаштований у діалоговому вікні",
-        "zh-cn": "特性: 在对话框中可配置警告之一"
       }
     },
     "titleLang": {

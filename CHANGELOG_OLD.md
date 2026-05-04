@@ -1,4 +1,9 @@
 # Older changes
+## 0.9.0 (2024-04-21)
+
+- (mcm1957) Adapter requires node.js >= 18 and js-controller >= 5 now
+- (mcm1957) Dependencies have been updated
+
 ## 0.8.0 (2024-03-30)
 
 -   feature: put KNX interface name into log
