@@ -50,15 +50,17 @@ class openknx extends utils.Adapter {
         this.stopping = false;
         this.linkedStateMap = {}; // foreignStateId → knxObjectId (reverse lookup for Direct Link)
 
-        // Base DPTs without subtype that get unwanted scaling or missing subtype in KNXUltimate
-        // KNXUltimate defaults to subtype .001 which doesn't exist for all DPTs
-        this.baseDptRawMap = {
+        // DPTs where KNXUltimate's default subtype .001 does not exist — always map
+        this.baseDptFixMap = {
             DPT3: "DPT3.007",
-            DPT5: "DPT5.005",
-            DPT6: "DPT6.010",
             DPT14: "DPT14.007",
             DPT15: "DPT15.000",
             DPT29: "DPT29.010",
+        };
+        // DPTs where .001 exists but applies unwanted scaling — only map when rawBaseDpt enabled
+        this.baseDptRawMap = {
+            DPT5: "DPT5.005",
+            DPT6: "DPT6.010",
         };
 
         // redirect log from KNXUltimate (winston-based logStream) to adapter log
@@ -597,15 +599,22 @@ class openknx extends utils.Adapter {
     }
 
     /**
-     * Returns the effective DPT string. When rawBaseDpt is enabled and a base DPT
-     * without subtype is given (e.g. "DPT5"), maps it to an unscaled subtype
-     * to match knx.js 0.9.x behavior (no percentage scaling).
+     * Returns the effective DPT string.
+     * 1) Always fixes DPTs where .001 doesn't exist in KNXUltimate (DPT3, DPT14, etc.)
+     * 2) When rawBaseDpt is enabled, maps DPT5/DPT6 to unscaled subtypes (0.9.1 compat)
      */
     effectiveDpt(dpt) {
-        if (this.config.rawBaseDpt !== false && dpt && dpt.indexOf(".") === -1) {
-            const mapped = this.baseDptRawMap[dpt.toUpperCase()];
-            if (mapped) {
-                return mapped;
+        if (dpt && dpt.indexOf(".") === -1) {
+            const upper = dpt.toUpperCase();
+            const fix = this.baseDptFixMap[upper];
+            if (fix) {
+                return fix;
+            }
+            if (this.config.rawBaseDpt !== false) {
+                const mapped = this.baseDptRawMap[upper];
+                if (mapped) {
+                    return mapped;
+                }
             }
         }
         return dpt;
