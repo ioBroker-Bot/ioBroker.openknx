@@ -1,4 +1,10 @@
 # Older changes
+## 0.9.1 (2026-03-12)
+- bugfix: Fixing increased delay in knx commands after several days
+- (copilot) Adapter requires admin >= 7.7.22 now
+- (copilot) Adapter requires js-controller >= 6.0.11 now
+- (@klein0r) Adapter requires node.js >= 20 and js-controller >= 6 now
+
 ## 0.9.0 (2024-04-21)
 
 - (mcm1957) Adapter requires node.js >= 18 and js-controller >= 5 now

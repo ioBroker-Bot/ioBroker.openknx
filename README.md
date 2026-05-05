@@ -52,6 +52,9 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
   Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 1.1.10 (2026-05-05)
+- add new DPTs and units
+
 ### 1.1.9 (2026-05-04)
 - fix handling of unkown DPT
 
@@ -74,12 +77,6 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
 - (TA2k) feature: Improved role detection (switch, level, value, text, date) based on DPT type
 - (TA2k) feature: Direct Link all iobroker states to a KNX state with a conversion mode
 - (TA2k) feature: GA-Tools: all GA properties editable (DPT, type, role, flags) with compact layout
-
-### 0.9.1 (2026-03-12)
-- bugfix: Fixing increased delay in knx commands after several days
-- (copilot) Adapter requires admin >= 7.7.22 now
-- (copilot) Adapter requires js-controller >= 6.0.11 now
-- (@klein0r) Adapter requires node.js >= 20 and js-controller >= 6 now
 
 ### initial version
 

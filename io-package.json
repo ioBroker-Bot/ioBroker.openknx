@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "openknx",
-    "version": "1.1.9",
+    "version": "1.1.10",
     "news": {
+      "1.1.10": {
+        "en": "add new DPTs and units",
+        "de": "neue DPTs und Einheiten hinzugefügt",
+        "ru": "добавить новые DPT и блоки",
+        "pt": "adicionar novos DPTs e unidades",
+        "nl": "nieuwe DPT's en eenheden toevoegen",
+        "fr": "ajouter de nouveaux DPT et unités",
+        "it": "aggiungere nuovi DPT e unità",
+        "es": "añadir nuevos DPTs y unidades",
+        "pl": "dodać nowe DPT i jednostki",
+        "uk": "додати нові ДРТ і юніти",
+        "zh-cn": "添加新的 DPT 和单位"
+      },
       "1.1.9": {
         "en": "fix handling of unkown DPT",
         "de": "Die Behandlung von unbekannten DPTs gefixt",
@@ -80,19 +93,6 @@
         "pl": "Adapter wymaga node.js > = 18 i kontroler js- > = 5 teraz\nZaktualizowano zależności",
         "uk": "Адаптер вимагає node.js >= 18 і js-controller >= 5 тепер\nЗалежність було оновлено",
         "zh-cn": "适配器需要节点.js QQ18和js控制器 QQ 现在5号\n依赖关系已更新"
-      },
-      "0.8.0": {
-        "en": "feature: put KNX interface name into log\nbugfix: #419 wait for connection complete before data processing in case of receiving data before\nbugfix: #457 Ack missing after changing IOB object value",
-        "de": "feature: KNX-Schnittstellenname in Log setzen\nbugfix: #419 warten auf die vollständige verbindung vor der datenverarbeitung im falle des empfangens von daten vor\nbugfix: #457 Ack fehlt nach Änderung des IOB-Objektwerts",
-        "ru": "функция: введите имя интерфейса KNX в журнал\nbugfix: #419 дождаться завершения соединения перед обработкой данных в случае получения данных\n#457 Не хватает после изменения значения объекта IOB",
-        "pt": "característica: colocar o nome da interface KNX no log\nbugfix: #419 esperar pela conexão completa antes do processamento de dados em caso de receber dados antes\nbugfix: #457 Falta após alterar o valor do objeto IOB",
-        "nl": "functie: zet KNX interfacenaam in log\nbugfix: #419 wacht op verbinding voltooid voordat gegevens worden verwerkt in geval van het ontvangen van gegevens voor\nbugfix: #457 Ack ontbreekt na het veranderen van IOB-objectwaarde",
-        "fr": "fonctionnalité: mettre le nom de l'interface KNX dans log\nbugfix: #419 attendre la connexion complète avant le traitement des données en cas de réception des données avant\nbugfix : #457 Ack manquant après modification de la valeur de l'objet IOB",
-        "it": "funzione: inserire il nome dell'interfaccia KNX nel log\nbugfix: #419 attendere la connessione completa prima dell'elaborazione dei dati in caso di ricezione dei dati prima\nbugfix: #457 Ack mancante dopo aver cambiato il valore dell'oggetto IOB",
-        "es": "función: poner el nombre de interfaz KNX en el registro\nbugfix: #419 esperar la conexión completa antes del procesamiento de datos en caso de recibir datos antes\nbugfix: #457 Falta después de cambiar el valor del objeto IOB",
-        "pl": "funkcja: umieścić nazwę interfejsu KNX w logu\nbugfix: # 419 czekać na połączenie zakończone przed przetwarzaniem danych w przypadku otrzymania danych przed\nbugfix: # 457 Brak Ack po zmianie wartości obiektu IOB",
-        "uk": "функція: покласти ім'я інтерфейсу KNX в журнал\nвиправлення помилок: #419 почекайте підключення до обробки даних у разі отримання даних до\nenglish, Українська, Français... Відсутня після зміни значення об'єкта IOB",
-        "zh-cn": "特性: 将 KNX 接口名称放入日志\nbugfix: # 419 在数据处理之前等待连接完成, 以防在接收数据之前\n错误修正 : # 457 更改 IOB 对象值后丢失"
       }
     },
     "titleLang": {
