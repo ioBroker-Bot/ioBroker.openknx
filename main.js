@@ -966,13 +966,27 @@ class openknx extends utils.Adapter {
             }
         }
 
-        // Build KNXUltimate client options
+        // KNXUltimate "interface" option expects an OS name (e.g. "eth0"), config stores an IP
+        let ifaceName = "";
+        if (this.config.localInterface) {
+            const interfaces = require("os").networkInterfaces();
+            for (const [name, addrs] of Object.entries(interfaces)) {
+                if (addrs && addrs.some((a) => a.address === this.config.localInterface)) {
+                    ifaceName = name;
+                    break;
+                }
+            }
+            if (!ifaceName) {
+                this.log.warn(`Configured local interface IP ${this.config.localInterface} not found on this system. Using auto-detection.`);
+            }
+        }
+
         const knxOptions = {
             hostProtocol,
             ipAddr,
             ipPort: this.config.gwipport,
             physAddr: this.config.eibadr || "0.0.0",
-            localIPAddress: this.config.localInterface,
+            interface: ifaceName,
             KNXQueueSendIntervalMilliseconds: this.config.sendInterval || 25,
             // https://github.com/Supergiovane/node-red-contrib-knx-ultimate/issues/78
             suppress_ack_ldatareq: true,
