@@ -52,6 +52,9 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
   Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 1.1.11 (2026-05-08)
+- fix for UDP interface connection
+
 ### 1.1.10 (2026-05-05)
 - add new DPTs and units
 
@@ -64,19 +67,6 @@ ioBroker adapter for KNX IP communication, powered by [KNXUltimate](https://gith
 
 ### 1.1.7 (2026-04-29)
 - improve Umlaute handling for DPT-16
-
-### 1.1.6 (2026-04-12)
-
-- (TA2k) **breaking:** KNX communication switched to KNXUltimate
-- (TA2k) **breaking:** DPT21 property names changed (outofservice → outOfService, inalarm → inAlarm, alarmeunack → alarmUnAck), values must be boolean
-- (TA2k) **breaking:** DPT237 property names changed to camelCase
-- (TA2k) feature: Native .knxproj import (ETS4/5/6, password-protected) with flags, DPT inference, room assignment
-- (TA2k) feature: KNX Secure support
-- (TA2k) feature: Extended DPT coverage and compatibility (9 additional DPTs, including DPT-22, 213, 222, 235, 242, 249, 251)
-- (TA2k) feature: Improved connection stability
-- (TA2k) feature: Improved role detection (switch, level, value, text, date) based on DPT type
-- (TA2k) feature: Direct Link all iobroker states to a KNX state with a conversion mode
-- (TA2k) feature: GA-Tools: all GA properties editable (DPT, type, role, flags) with compact layout
 
 ### initial version
 
