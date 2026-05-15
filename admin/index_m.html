@@ -795,7 +795,6 @@
                         + '</p>';
                     html += '<p><b>' + _('Convert') + ':</b> '
                         + '<input type="text" id="gaLinkConvert" style="display:inline-block;width:200px;margin-left:8px" placeholder="' + _('e.g. !!value, value*100') + '" value="' + (obj.native.linkedStateConvert || '') + '" />'
-                        + ' <a class="waves-effect waves-light btn-small" onclick="gaSaveLinkSettings()">' + _('Save') + '</a>'
                         + '<p style="color:#666;font-size:0.85em;margin-top:2px">' + _('JS expression. Variable: value. Examples: !!value, value*100, value>0?100:0, Math.round(value)') + '</p>'
                         + '</p>';
                     html += '<p id="gaLinkCyclicRow"><b>' + _('Cyclic send') + ':</b> '
@@ -803,6 +802,7 @@
                         + ' <span style="color:#666;font-size:0.85em">min</span>'
                         + '<p style="color:#666;font-size:0.85em;margin-top:2px">' + _('Periodically re-send current value to KNX bus. Leave empty to disable.') + '</p>'
                         + '</p>';
+                    html += '<div style="margin-top:16px"><a class="waves-effect waves-light btn-small" onclick="gaSaveLinkSettings()">' + _('Save') + '</a></div>';
                     html += '<div style="margin-top:24px"><a class="waves-effect waves-light btn-small red" onclick="gaRemoveLink()">' + _('Remove Link') + '</a></div>';
                     $('#gaLinkContent').html(html);
                     $('#gaLinkMode').val(mode);

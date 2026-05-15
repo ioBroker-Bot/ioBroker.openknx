@@ -873,6 +873,11 @@ class openknx extends utils.Adapter {
         const oldLinked = oldData.native?.linkedState;
         const newLinked = obj?.native?.linkedState;
 
+        // Always update gaList with latest object data (e.g. linkedStateCyclic, threshold, convert)
+        if (obj) {
+            this.gaList.set(id, obj.native.address, obj);
+        }
+
         if (oldLinked === newLinked) {
             return;
         }
@@ -890,11 +895,6 @@ class openknx extends utils.Adapter {
             await this.subscribeForeignStatesAsync(newLinked);
             this.linkedStateMap[newLinked] = id;
             this.log.info(`Direct Link added: ${id} ↔ ${newLinked}`);
-        }
-
-        // Update gaList with new object data
-        if (obj) {
-            this.gaList.set(id, obj.native.address, obj);
         }
     }
 
