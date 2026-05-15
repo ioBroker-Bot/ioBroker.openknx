@@ -49,6 +49,9 @@ class openknx extends utils.Adapter {
         this.reconnectTimer = undefined;
         this.stopping = false;
         this.linkedStateMap = {}; // foreignStateId → knxObjectId (reverse lookup for Direct Link)
+        this.cyclicTimer = undefined;
+        this.cyclicLastSent = new Map(); // knxObjectId → timestamp (ms)
+        this.cyclicTimeouts = [];
 
         // redirect log from KNXUltimate (winston-based logStream) to adapter log
         // Collapse multiline messages (stack traces) into a single line
@@ -118,6 +121,7 @@ class openknx extends utils.Adapter {
             clearInterval(this.interval1);
             clearInterval(this.autoreadTimer);
             clearTimeout(this.reconnectTimer);
+            clearInterval(this.cyclicTimer);
             this.stopping = true;
             this.connected = false;
 
@@ -686,6 +690,7 @@ class openknx extends utils.Adapter {
                 );
                 try {
                     this.knxConnection.write(gaData.native.address, writeVal, gaData.native.dpt);
+                    this.cyclicLastSent.set(linkedKnxId, Date.now());
                 } catch (e) {
                     this.log.warn(`Direct Link write failed for ${gaData.native.address}: ${e.message}`);
                 }
@@ -876,6 +881,7 @@ class openknx extends utils.Adapter {
         if (oldLinked) {
             await this.unsubscribeForeignStatesAsync(oldLinked);
             delete this.linkedStateMap[oldLinked];
+            this.cyclicLastSent.delete(id);
             this.log.info(`Direct Link removed: ${id} ↔ ${oldLinked}`);
         }
 
@@ -906,6 +912,7 @@ class openknx extends utils.Adapter {
                     const gaData = this.gaList.getDataById(knxId);
                     if (gaData?.native?.address && gaData?.native?.dpt) {
                         this.knxConnection.write(gaData.native.address, foreignState.val, gaData.native.dpt);
+                        this.cyclicLastSent.set(knxId, Date.now());
                         this.log.debug(`Direct Link sync: ${foreignId}=${foreignState.val} → ${gaData.native.address}`);
                     }
                 }
@@ -913,6 +920,82 @@ class openknx extends utils.Adapter {
                 this.log.warn(`Direct Link sync failed for ${foreignId}: ${e.message}`);
             }
         }
+    }
+
+    startCyclicSending() {
+        this.stopCyclicSending();
+        const CHECK_INTERVAL_MS = 30 * 1000;
+
+        this.cyclicTimer = setInterval(async () => {
+            if (!this.connected || !this.knxConnection) {
+                return;
+            }
+
+            const now = Date.now();
+            const toSend = [];
+
+            for (const [foreignId, knxId] of Object.entries(this.linkedStateMap)) {
+                const gaData = this.gaList.getDataById(knxId);
+                if (!gaData?.native?.linkedStateCyclic || gaData.native.linkedStateCyclic <= 0) {
+                    continue;
+                }
+                const mode = gaData.native.linkedStateMode || "direct";
+                if (mode !== "direct") {
+                    continue;
+                }
+                const intervalMs = gaData.native.linkedStateCyclic * 60 * 1000;
+                const lastSent = this.cyclicLastSent.get(knxId) || 0;
+                if (now - lastSent >= intervalMs) {
+                    toSend.push({ foreignId, knxId, gaData });
+                }
+            }
+
+            this.cyclicTimeouts = [];
+            for (let i = 0; i < toSend.length; i++) {
+                const { foreignId, knxId, gaData } = toSend[i];
+                this.cyclicLastSent.set(knxId, now);
+                const t = setTimeout(async () => {
+                    if (!this.connected || !this.knxConnection) {
+                        return;
+                    }
+                    try {
+                        const foreignState = await this.getForeignStateAsync(foreignId);
+                        if (foreignState?.val == null) {
+                            return;
+                        }
+                        let writeVal = foreignState.val;
+                        if (gaData.native.linkedStateConvert) {
+                            try {
+                                writeVal = new Function("value", `return ${gaData.native.linkedStateConvert}`)(
+                                    writeVal,
+                                );
+                            } catch (e) {
+                                this.log.warn(`Cyclic send convert error for ${gaData.native.address}: ${e.message}`);
+                                return;
+                            }
+                        }
+                        this.knxConnection.write(gaData.native.address, writeVal, gaData.native.dpt);
+                        this.log.debug(
+                            `Cyclic send: ${foreignId}=${JSON.stringify(writeVal)} → ${gaData.native.address}`,
+                        );
+                    } catch (e) {
+                        this.log.warn(`Cyclic send failed for ${gaData.native.address}: ${e.message}`);
+                    }
+                }, i * 200);
+                this.cyclicTimeouts.push(t);
+            }
+        }, CHECK_INTERVAL_MS);
+    }
+
+    stopCyclicSending() {
+        if (this.cyclicTimer) {
+            clearInterval(this.cyclicTimer);
+            this.cyclicTimer = undefined;
+        }
+        for (const t of this.cyclicTimeouts) {
+            clearTimeout(t);
+        }
+        this.cyclicTimeouts = [];
     }
 
     // Reconnect delays in seconds: 10, 30, 60, 120, 120, 120, 120
@@ -971,13 +1054,15 @@ class openknx extends utils.Adapter {
         if (this.config.localInterface) {
             const interfaces = require("os").networkInterfaces();
             for (const [name, addrs] of Object.entries(interfaces)) {
-                if (addrs && addrs.some((a) => a.address === this.config.localInterface)) {
+                if (addrs && addrs.some(a => a.address === this.config.localInterface)) {
                     ifaceName = name;
                     break;
                 }
             }
             if (!ifaceName) {
-                this.log.warn(`Configured local interface IP ${this.config.localInterface} not found on this system. Using auto-detection.`);
+                this.log.warn(
+                    `Configured local interface IP ${this.config.localInterface} not found on this system. Using auto-detection.`,
+                );
             }
         }
 
@@ -1123,6 +1208,7 @@ class openknx extends utils.Adapter {
 
             // Direct Link: Sync linked foreign state values to KNX bus
             this.syncLinkedStates();
+            this.startCyclicSending();
         });
 
         // Event: disconnected
@@ -1133,6 +1219,7 @@ class openknx extends utils.Adapter {
             this.connected = false;
             this.setState("info.connection", this.connected, true);
             this.setState("info.busload", 0, true);
+            this.stopCyclicSending();
             this.scheduleReconnect();
         });
 

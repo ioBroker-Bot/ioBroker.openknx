@@ -798,12 +798,20 @@
                         + ' <a class="waves-effect waves-light btn-small" onclick="gaSaveLinkSettings()">' + _('Save') + '</a>'
                         + '<p style="color:#666;font-size:0.85em;margin-top:2px">' + _('JS expression. Variable: value. Examples: !!value, value*100, value>0?100:0, Math.round(value)') + '</p>'
                         + '</p>';
+                    html += '<p id="gaLinkCyclicRow"><b>' + _('Cyclic send') + ':</b> '
+                        + '<input type="number" id="gaLinkCyclic" style="display:inline-block;width:80px;margin-left:8px" step="1" min="1" value="' + (obj.native.linkedStateCyclic || '') + '" />'
+                        + ' <span style="color:#666;font-size:0.85em">min</span>'
+                        + '<p style="color:#666;font-size:0.85em;margin-top:2px">' + _('Periodically re-send current value to KNX bus. Leave empty to disable.') + '</p>'
+                        + '</p>';
                     html += '<div style="margin-top:24px"><a class="waves-effect waves-light btn-small red" onclick="gaRemoveLink()">' + _('Remove Link') + '</a></div>';
                     $('#gaLinkContent').html(html);
                     $('#gaLinkMode').val(mode);
                     $('#gaLinkModeDesc').text(modeDescs[mode] || '');
+                    $('#gaLinkCyclicRow').toggle(mode === 'direct');
                     $('#gaLinkMode').on('change', function () {
-                        $('#gaLinkModeDesc').text(modeDescs[$(this).val()] || '');
+                        var m = $(this).val();
+                        $('#gaLinkModeDesc').text(modeDescs[m] || '');
+                        $('#gaLinkCyclicRow').toggle(m === 'direct');
                         gaUpdateMode();
                     });
                     return;
@@ -908,6 +916,9 @@
                 socket.emit('getObject', selectedGaId, function (err, gaObj) {
                     if (err || !gaObj) return;
                     gaObj.native.linkedStateMode = mode;
+                    if (mode !== 'direct') {
+                        delete gaObj.native.linkedStateCyclic;
+                    }
                     socket.emit('setObject', selectedGaId, gaObj, function () {
                         gaObjects[selectedGaId] = gaObj;
                         showToast(null, 'Mode changed to: ' + mode, null, 2000);
@@ -920,6 +931,8 @@
                 var thresholdVal = $('#gaLinkThreshold').val();
                 var threshold = thresholdVal ? parseFloat(thresholdVal) : 0;
                 var convert = $('#gaLinkConvert').val().trim();
+                var cyclicVal = $('#gaLinkCyclic').val();
+                var cyclic = cyclicVal ? parseInt(cyclicVal, 10) : 0;
                 socket.emit('getObject', selectedGaId, function (err, gaObj) {
                     if (err || !gaObj) return;
                     if (threshold > 0) {
@@ -931,6 +944,11 @@
                         gaObj.native.linkedStateConvert = convert;
                     } else {
                         delete gaObj.native.linkedStateConvert;
+                    }
+                    if (cyclic > 0) {
+                        gaObj.native.linkedStateCyclic = cyclic;
+                    } else {
+                        delete gaObj.native.linkedStateCyclic;
                     }
                     socket.emit('setObject', selectedGaId, gaObj, function () {
                         gaObjects[selectedGaId] = gaObj;
